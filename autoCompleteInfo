@@ -1,0 +1,10 @@
+#! /bin/bash
+# This script requires 3 paramaters: "fileName" "name" "idNum"     # Example: "Quiz_04 2.tex" 
+
+fileName="$1"
+name="$2"
+idNum="$3"
+agreementInput='%% Typing "I agree to the above," followed by your name is sufficient.'
+agreementOutputPrefix='I agree to the above,'                                                                         # name is inserted during sed
+
+sed -i "s/Your Name/$name/; s/Your Student ID/$idNum/; s/$agreementInput/$agreementOutputPrefix $name./" "$fileName"
