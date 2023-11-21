@@ -17,10 +17,12 @@ def findRecentFile():
     newestFile = max(fileList, key=os.path.getctime)
     return newestFile[2:]
 
-def changesConfirmed(pdfFileName):
-    new_content = pdfToTxt(pdfFileName)
+def changesConfirmed():
+    with open(findRecentFile()) as input:
+        for line in input:
+            new_content += line
     regex = r'(Keith Bates)'
-    search_result = len(re.search(regex, content).groups())     # should be 2 results for each occurence of my name
+    search_result = len(re.findall(regex, content).groups())     # should be 2 results for each occurence of my name
     if search_result == 2:
         print("Changes confirmed :)\n")
 
@@ -68,7 +70,7 @@ finally:
     try:                                                # The next file that will be added to the directory is the .tex file, which can have some info be auto completed including: (name, Student ID, Agreement)
         waitForTexFile(info.name, info.idNum)
         print("Complete!")
-        # changesConfirmed(recentFile)
+        # changesConfirmed()
     except:
         print("!!Failed to fill out your info!!")
 
