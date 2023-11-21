@@ -19,15 +19,16 @@ def findRecentFile():
 
 def confirmChanges():
     new_content = ""
-    with open(findRecentFile()) as input:
-        for line in input:
+    with open(findRecentFile()) as file:
+        for line in file:
             new_content += line
-    regex = r'(Keith Bates)'
-    search_result = len(re.findall(regex, new_content))     # should be 3 results for each occurence of my name
-    if search_result == 3:
+    file.close()
+    regex = r"('%s')" % (info.name)     #? how can i use a variable in a regex string?
+    
+    if search_result:=len(re.findall(regex, new_content)) == 3:    # should be 3 results for each occurence of my name
         print("---changes confirmed---")
     else:
-        print("---verify changes, only ", str(search_result), " occurences found---")
+        print("---verify changes, ", int(search_result), " occurences found---")
 
 def waitForTexFile(name, idNum):
     t_end = time.time() + 60 * 5    # Time will run for 5 minutes
@@ -38,12 +39,9 @@ def waitForTexFile(name, idNum):
             try:
                 os.system(sysCmd)
                 print("File" + str(file) + " changed where applicable")
-                # confirmChanges()
                 return
             except:
                 print("!!Error when trying to make changes!!")
-
-
 
 try:                                                    # Extract the quiz code from the most recently downloaded file (soon to be only PDF captured) and then copied to clipboard (Linux only) 
     recentFile = findRecentFile()                       #finds most recently modified file in current directory
