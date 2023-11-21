@@ -17,6 +17,13 @@ def findRecentFile():
     newestFile = max(fileList, key=os.path.getctime)
     return newestFile[2:]
 
+def changesConfirmed(pdfFileName):
+    new_content = pdfToTxt(pdfFileName)
+    regex = r'(Keith Bates)'
+    search_result = len(re.search(regex, content).groups())     # should be 2 results for each occurence of my name
+    if search_result == 2:
+        print("Changes confirmed :)\n")
+
 def waitForTexFile(name, idNum):
     t_end = time.time() + 60 * 5    # Time will run for 5 minutes
     while time.time() < t_end:
@@ -26,6 +33,7 @@ def waitForTexFile(name, idNum):
             try:
                 os.system(sysCmd)
                 print("File" + str(file) + " changed where applicable")
+                # changesConfirmed()
                 #! I should add checks to ensure that the changes were made. Maybe as simple as doing a "find" for each altered attribute
                 return
             except:
@@ -60,7 +68,8 @@ finally:
     try:                                                # The next file that will be added to the directory is the .tex file, which can have some info be auto completed including: (name, Student ID, Agreement)
         waitForTexFile(info.name, info.idNum)
         print("Complete!")
+        # changesConfirmed(recentFile)
     except:
         print("!!Failed to fill out your info!!")
 
-
+changesConfirmed(recentFile)    # just here for testing
