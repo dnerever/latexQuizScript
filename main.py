@@ -18,13 +18,16 @@ def findRecentFile():
     return newestFile[2:]
 
 def changesConfirmed():
+    new_content = ""
     with open(findRecentFile()) as input:
         for line in input:
             new_content += line
     regex = r'(Keith Bates)'
-    search_result = len(re.findall(regex, content).groups())     # should be 2 results for each occurence of my name
-    if search_result == 2:
-        print("Changes confirmed :)\n")
+    search_result = len(re.findall(regex, new_content))     # should be 3 results for each occurence of my name
+    if search_result == 3:
+        print("---changes confirmed---")
+    else:
+        print("---verify changes, only ", str(search_result), " occurences found---")
 
 def waitForTexFile(name, idNum):
     t_end = time.time() + 60 * 5    # Time will run for 5 minutes
@@ -36,7 +39,6 @@ def waitForTexFile(name, idNum):
                 os.system(sysCmd)
                 print("File" + str(file) + " changed where applicable")
                 # changesConfirmed()
-                #! I should add checks to ensure that the changes were made. Maybe as simple as doing a "find" for each altered attribute
                 return
             except:
                 print("!!Error when trying to make changes!!")
@@ -74,4 +76,4 @@ finally:
     except:
         print("!!Failed to fill out your info!!")
 
-changesConfirmed(recentFile)    # just here for testing
+changesConfirmed()    # just here for testing
