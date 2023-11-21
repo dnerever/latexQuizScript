@@ -17,8 +17,8 @@ def findRecentFile():
     newestFile = max(fileList, key=os.path.getctime)
     return newestFile[2:]
 
-def changesConfirmed():
-    new_content = ""
+def confirmChanges():
+= ""
     with open(findRecentFile()) as input:
         for line in input:
             new_content += line
@@ -38,9 +38,8 @@ def waitForTexFile(name, idNum):
             try:
                 os.system(sysCmd)
                 print("File" + str(file) + " changed where applicable")
-                # changesConfirmed()
-                return
-            except:
+                # confirmChanges()
+                            except:
                 print("!!Error when trying to make changes!!")
 
 
@@ -71,9 +70,6 @@ except:
 finally:
     try:                                                # The next file that will be added to the directory is the .tex file, which can have some info be auto completed including: (name, Student ID, Agreement)
         waitForTexFile(info.name, info.idNum)
-        print("Complete!")
-        # changesConfirmed()
+        confirmChanges()
     except:
         print("!!Failed to fill out your info!!")
-
-changesConfirmed()    # just here for testing
