@@ -1,7 +1,7 @@
 # latexQuizScript
 A Python and a Bash script that I created for use during my timed Algorithms Quizzes to save time opening, copying and writing to latex and pdf documents.
 
-## Requirements (Current)
+## Requirements
 
 - Unix based OS (Ubuntu, Fedora, etc)
 - Python3
