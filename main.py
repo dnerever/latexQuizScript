@@ -5,8 +5,6 @@ try:                                                    # Extract the quiz code 
     recentPdf = f.findRecentFile(".pdf")                       #finds most recently modified file in current directory
     code = f.getCode(recentPdf)
     f.copyToClipboard(code, recentPdf)
-except:
-    print("-!-Most recent file not found-!-")
 finally:
     f.waitForTexFile(i.name, i.idNum)
     f.confirmChanges()

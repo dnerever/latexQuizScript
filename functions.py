@@ -14,8 +14,13 @@ def pdfToTxt(pdfFileName):
 
 def findRecentFile(file_type):
     fileList = glob.glob("./*" + file_type)
-    newestFile = max(fileList, key=os.path.getctime)
-    return newestFile[2:]
+    if len(fileList) <= 0:
+        print("-!-Most recent file not found-!-")
+        return
+    else:
+        newestFile = max(fileList, key=os.path.getctime)
+        return newestFile[2:]
+    
 
 def fileCount(file_type):
     fileList = glob.glob("./*" + file_type)
