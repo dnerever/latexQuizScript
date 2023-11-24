@@ -24,12 +24,12 @@ def fileCount(file_type):
 
 def confirmChanges():
     new_content = ""
-    with open(findRecentFile(".pdf")) as file:
+    with open(findRecentFile(".tex")) as file:
         for line in file:
             new_content += line
     file.close()
-    regex = r"('%s')" % (info.name)     #? how can i use a variable in a regex string?
-    
+
+    regex = fr"({info.name})"
     if search_result:=len(re.findall(regex, new_content)) == 3:    # should be 3 results for each occurence of my name
         print("---changes confirmed---")
     else:
